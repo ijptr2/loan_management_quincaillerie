@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block content %}
+<h1>Register New Loan</h1>
+<form method="POST">
+  <h2>Client Information</h2>
+  <label for="client_name">Client Name:</label>
+  <input type="text" id="client_name" name="client_name" required />
+  <label for="phone_number">Phone Number:</label>
+  <input type="tel" id="phone_number" name="phone_number" required />
+  <label for="business_name">Business Name:</label>
+  <input type="text" id="business_name" name="business_name" required />
+  <label for="tin_number">TIN Number:</label>
+  <input type="text" id="tin_number" name="tin_number" required />
+  <label for="due_date">Due Date:</label>
+  <input type="date" id="due_date" name="due_date" required />
+
+  <h2>Items</h2>
+  <div id="items">
+    <div class="item">
+      <label for="item_name">Item Name:</label>
+      <input type="text" name="item_name[]" required />
+      <label for="item_quantity">Quantity:</label>
+      <input type="number" name="item_quantity[]" required />
+      <label for="item_unit">Unit:</label>
+      <input type="text" name="item_unit[]" required />
+      <label for="item_price">Price:</label>
+      <input type="number" step="0.01" name="item_price[]" required />
+    </div>
+  </div>
+  <button type="button" id="add_item">Add Item</button>
+  <button type="submit">Register Loan</button>
+</form>
+
+<script>
+  document.getElementById("add_item").addEventListener("click", function () {
+    var itemsDiv = document.getElementById("items");
+    var newItem = document.createElement("div");
+    newItem.className = "item";
+    newItem.innerHTML = `
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name[]" required>
+                <label for="item_quantity">Quantity:</label>
+                <input type="number" name="item_quantity[]" required>
+                <label for="item_unit">Unit:</label>
+                <input type="text" name="item_unit[]" required>
+                <label for="item_price">Price:</label>
+                <input type="number" step="0.01" name="item_price[]" required>
+            `;
+    itemsDiv.appendChild(newItem);
+  });
+</script>
+{% endblock %}
